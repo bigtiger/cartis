@@ -1,0 +1,8 @@
+h1. jQuery Google Maps Plugin
+
+h6. A fork of the work by "Shawn Mayzes":http://googlemaps.mayzes.org/
+
+A Google Maps Wrapper with the magic of jQuery.
+
+See the "examples":http://github.com/bigtiger/jquery-google-maps-plugin/tree/master/examples/ directory for usage.
+
