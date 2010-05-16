@@ -8,24 +8,28 @@
 
   <body>
     <div id='map_canvas' style='width: 400px; height: 300px'></div>
+    <div id="caption" style="display:none;">Wheee!</div>
     <div id='implementation'>
       <code>
         <pre>
 jQuery(function($) {
+  // draw the map
   $('#map_canvas').googleMaps({
     latitude: 42.351505,
     longitude: -71.094455
   });
+
+  // place marker
   var marker = $.googleMaps.mapMarkers({
     latitude: 42.3515,
     longitude: -71.0944
   });
+
+  // Add hover event handler
   $.googleMaps.hover(marker[0], function() {
-      // do something
-      console.log('moused over');
+      $('#caption').show();
     }, function() {
-      // do something else
-      console.log('moused out');
+      $('#caption').hide();
     }
   );
 });
@@ -39,15 +43,16 @@ jQuery(function($) {
         latitude: 42.351505,
         longitude: -71.094455
       });
+
       var marker = $.googleMaps.mapMarkers({
         latitude: 42.3515,
         longitude: -71.0944
       });
 
       $.googleMaps.hover(marker[0], function() {
-          console.log('moused over');
+          $('#caption').show();
         }, function() {
-          console.log('moused out');
+          $('#caption').hide();
         }
       );
     });
