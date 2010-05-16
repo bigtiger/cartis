@@ -260,9 +260,10 @@
       return gIcon;
     },
     mapMarkers: function(markers) {
-          if ( typeof(markers.length) == 'undefined' )
-      // One marker only. Parse it into an array for consistency.
-              markers = [markers];
+      if ( typeof(markers.length) == 'undefined' ) {
+        // One marker only. Parse it into an array for consistency.
+        markers = [markers];
+      }
       
       var j = 0;
       for ( i = 0; i<markers.length; i++) {
