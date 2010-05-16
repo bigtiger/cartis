@@ -82,7 +82,7 @@
       
       // MARKERS
       if ( opts.markers )
-        $.googleMaps.mapMarkers(center, opts.markers);
+        $.googleMaps.mapMarkers(opts.markers);
 
       // CONTROLS
       if ( opts.controls.type || opts.controls.zoom ||  opts.controls.mapType ) {
@@ -259,7 +259,7 @@
         gIcon.transparent = icon.transparent;
       return gIcon;
     },
-    mapMarkers: function(center, markers) {
+    mapMarkers: function(markers) {
           if ( typeof(markers.length) == 'undefined' )
       // One marker only. Parse it into an array for consistency.
               markers = [markers];
