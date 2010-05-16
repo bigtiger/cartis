@@ -28,6 +28,13 @@
   };
 
   $.googleMaps = {
+
+    // Returns the visible rectangular region of the map view in
+    // geographical coordinates.
+    bounds: function() {
+      return $.googleMaps.gMap.getBounds();
+    },
+    
     mapsConfiguration: function(opts) {
       // GEOCODE
       if ( opts.geocode ) {
