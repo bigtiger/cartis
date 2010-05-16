@@ -302,11 +302,11 @@
         if ( marker.icon ) {
           gIcon = $.googleMaps.mapMarkersOptions(marker.icon);
         }
-        
+
         var gmarker = null;
         if (marker.geocode) {
           var geocoder = new GClientGeocoder();
-          geocoder.getLatLng(marker.geocode, function(center) {										
+          geocoder.getLatLng(marker.geocode, function(center) {
             if (!center) {
               alert(address + " not found");
             } else {
