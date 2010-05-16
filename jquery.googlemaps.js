@@ -338,6 +338,15 @@
       return gmarkers;
     },
 
+    click: function(gObject, click_function) {
+      GEvent.addListener(gObject, 'click', click_function);
+    },
+
+    hover: function(gObject, mouseover_function, mouseout_function) {
+      GEvent.addListener(gObject, 'mouseover', mouseover_function);
+      GEvent.addListener(gObject, 'mouseout', mouseout_function);
+    },
+
     mapControlsLocation: function(location) {
       switch (location) {
         case 'G_ANCHOR_TOP_RIGHT' :
