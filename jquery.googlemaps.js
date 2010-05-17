@@ -235,55 +235,42 @@
         gIcon.image = icon.image;
       }
       if ( icon.shadow ) {
-        // Define Icons Shadow
         gIcon.shadow = icon.shadow;
       }
       if ( icon.iconSize ) {
-        // Define Icons Size
         gIcon.iconSize = new GSize(icon.iconSize);
       }
       if ( icon.shadowSize ) {
-        // Define Icons Shadow Size
         gIcon.shadowSize = new GSize(icon.shadowSize);
       }
       if ( icon.iconAnchor ) {
-        // Define Icons Anchor
         gIcon.iconAnchor = new GPoint(icon.iconAnchor);
       }
       if ( icon.infoWindowAnchor ) {
-        // Define Icons Info Window Anchor
         gIcon.infoWindowAnchor = new GPoint(icon.infoWindowAnchor);
       }
       if ( icon.dragCrossImage ) {
-        // Define Drag Cross Icon Image
         gIcon.dragCrossImage = icon.dragCrossImage;
       }
       if ( icon.dragCrossSize ) {
-        // Define Drag Cross Icon Size
         gIcon.dragCrossSize = new GSize(icon.dragCrossSize);
       }
       if ( icon.dragCrossAnchor ) {
-        // Define Drag Cross Icon Anchor
         gIcon.dragCrossAnchor = new GPoint(icon.dragCrossAnchor);
       }
       if ( icon.maxHeight ) {
-        // Define Icons Max Height
         gIcon.maxHeight = icon.maxHeight;
       }
       if ( icon.PrintImage ) {
-        // Define Print Image
         gIcon.PrintImage = icon.PrintImage;
       }
       if ( icon.mozPrintImage ) {
-        // Define Moz Print Image
         gIcon.mozPrintImage = icon.mozPrintImage;
       }
       if ( icon.PrintShadow ) {
-        // Define Print Shadow
         gIcon.PrintShadow = icon.PrintShadow;
       }
       if ( icon.transparent ) {
-        // Define Transparent
         gIcon.transparent = icon.transparent;
       }
       return gIcon;
