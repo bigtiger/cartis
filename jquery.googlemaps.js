@@ -1,8 +1,6 @@
 /*
- ### jQuery Google Maps Plugin v1.01 ###
- * Home: http://www.mayzes.org/googlemaps.jquery.html
- * Code: http://www.mayzes.org/js/jquery.googlemaps1.01.js
- * Date: 2010-01-14 (Thursday, 14 Jan 2010)
+ ### jQuery Google Maps Plugin v1.02 ###
+ * BasedOn: http://www.mayzes.org/googlemaps.jquery.html
  *
  * Dual licensed under the MIT and GPL licenses.
  *   http://www.gnu.org/licenses/gpl.html
