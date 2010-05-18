@@ -218,9 +218,9 @@
     mapPanOptions: function(options) {
       // Returns Panning Options
       var panDefaults = {
-        panLatitude:	37.4569,
-        panLongitude:	-122.1569,
-        timeout:		0
+        panLatitude: 37.4569,
+        panLongitude: -122.1569,
+        timeout: 0
       }
       return options = $.extend({}, panDefaults, options);
     },
