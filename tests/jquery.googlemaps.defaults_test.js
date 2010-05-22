@@ -42,4 +42,10 @@
     equals($.googleMaps.defaults.controls.localSearch, false, "is false (do not display) by default");
   });
 
+  module('$.googleMaps.defaults.controls.zoom');
+  test('zoom', function() {
+    ok(typeof($.googleMaps.defaults.controls.zoom.minimum) == 'number', "is a number");
+    ok($.googleMaps.defaults.controls.zoom.minimum >= 0 && $.googleMaps.defaults.controls.zoom.minimum <= 18, "is within the valid range (0-18)");
+  });
+
 })(jQuery);

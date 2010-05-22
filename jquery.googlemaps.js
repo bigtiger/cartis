@@ -184,7 +184,11 @@
       streetViewOverlay: false,
       controls: {
         hide: false,
-        localSearch: false
+        localSearch: false,
+        zoom: {
+          minimum: 0, // lowest, the entire world on one map
+          maximum: 19, // highest, down to individual buildings
+        }
       },
       layer: null
     },
@@ -412,8 +416,6 @@
         },
         zoom: {
           location: 'G_ANCHOR_TOP_LEFT',
-          minimum: 0, // lowest, the entire world on one map
-          maximum: 19, // highest, down to individual buildings
           x: 10,
           y: 10,
           control: 'GLargeMapControl3D'
