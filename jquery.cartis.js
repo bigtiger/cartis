@@ -14,11 +14,16 @@
        return this;
     }
 
-    var opts = $.extend({}, $.cartis.defaults, options);
+    var googleOpts = {
+      center: ($.cartis.mapLatLong($.cartis.defaults.latitude, $.cartis.defaults.longitude)),
+
+    };
+
+    var opts = $.extend({}, $.cartis.defaults, googleOpts, options);
 
     return this.each(function() {
       // Create Map
-      $.cartis.gMap = new GMap2(this, opts);
+      $.cartis.gMap = new google.maps.Map(this, opts);
       $.cartis.mapsConfiguration(opts);
     });
   };
@@ -46,7 +51,7 @@
         });
       } else {
         // Latitude & Longitude Center Point
-        var center	= $.cartis.mapLatLong(opts.latitude, opts.longitude);
+        var center = $.cartis.mapLatLong(opts.latitude, opts.longitude);
         // Set the center of the Map with the new Center Point and Depth
         $.cartis.gMap.setCenter(center, opts.depth);
       }
@@ -219,8 +224,7 @@
     },
 
     mapLatLong: function(latitude, longitude) {
-      // Returns Latitude & Longitude Center Point
-      return new GLatLng(latitude, longitude);
+      return new google.maps.LatLng(latitude, longitude);
     },
 
     mapPanOptions: function(options) {
@@ -399,14 +403,17 @@
 
     mapTypeControl: function(type) {
       switch ( type ) {
-        case 'G_NORMAL_MAP' :
-          return G_NORMAL_MAP;
+        case 'ROADMAP' :
+          return MapTypeId.ROADMAP;
         break;
-        case 'G_SATELLITE_MAP' :
-          return G_SATELLITE_MAP;
+        case 'SATELLITE' :
+          return MapTypeId.SATELLITE;
         break;
-        case 'G_HYBRID_MAP' :
-          return G_HYBRID_MAP;
+        case 'HYBRID' :
+          return MapTypeId.HYBRID;
+        break;
+        case 'TERRAIN' :
+          return MapTypeId.TERRAIN;
         break;
       }
       return;
