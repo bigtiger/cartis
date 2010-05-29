@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>Click Event Example - Cartis - jQuery Google Maps Plugin</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAg_mfIhcQZdh6vIt-3QcG6RT2yXp_ZAY8_ufC3CFXhHIE1NvwkxRE80ZyOVSxupxrpp2aJ_Rjsd4zDA" type="text/javascript"></script>
+    <script src="../jquery.cartis.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div id='map_canvas' style='width: 400px; height: 300px'></div>
+    <div id='markup'>
+      <div id="address" style='display: none'><p>Hashrocket</p>320 1st ST N, Jacksonville Beach, FL, 32250</div>
+    </div>
+    <div id='implementation'>
+      <code>
+        <pre>
+jQuery(function($) {
+  var gMarker;
+  var marker = {
+    latitude: 30.291498,
+    longitude: -81.390109,
+  }
+
+  $('#map_canvas').cartis({
+    latitude: 30.291498,
+    longitude: -81.390109,
+  });
+
+  gMarker = $.cartis.addMapMarker(marker);
+  $.cartis.click(gMarker, function() {
+    $('#address').toggle();
+  });
+});
+        </pre>
+      </code>
+    </div>
+  </body>
+  <script type="text/javascript">
+    jQuery(function($) {
+      var gMarker;
+      var marker = {
+        latitude: 30.291498,
+        longitude: -81.390109,
+      }
+
+      $('#map_canvas').cartis({
+        latitude: 30.291498,
+        longitude: -81.390109,
+      });
+
+      gMarker = $.cartis.addMapMarker(marker);
+      $.cartis.click(gMarker, function() {
+        $('#address').toggle();
+      });
+    });
+  </script>
+</html>
