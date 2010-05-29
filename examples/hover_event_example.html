@@ -20,13 +20,13 @@ jQuery(function($) {
   });
 
   // place marker
-  var marker = $.googleMaps.mapMarkers({
+  var marker = $.googleMaps.addMapMarker({
     latitude: 42.3515,
     longitude: -71.0944
   });
 
   // Add hover event handler
-  $.googleMaps.hover(marker[0], function() {
+  $.googleMaps.hover(marker, function() {
       $('#caption').show();
     }, function() {
       $('#caption').hide();
@@ -44,12 +44,12 @@ jQuery(function($) {
         longitude: -71.094455
       });
 
-      var marker = $.googleMaps.mapMarkers({
+      var marker = $.googleMaps.addMapMarker({
         latitude: 42.3515,
         longitude: -71.0944
       });
 
-      $.googleMaps.hover(marker[0], function() {
+      $.googleMaps.hover(marker, function() {
           $('#caption').show();
         }, function() {
           $('#caption').hide();
