@@ -1,5 +1,5 @@
 /*
- ### Cartis: a jQuery Google Maps Plugin v1.02 ###
+ ### Cartis: a jQuery Google Maps Plugin v1.03 ###
  * BasedOn: http://www.mayzes.org/googlemaps.jquery.html
  *
  * Dual licensed under the MIT and GPL licenses.
