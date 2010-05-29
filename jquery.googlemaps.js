@@ -14,10 +14,8 @@
        return this;
     }
 
-    // Fill default values where not set by instantiation code
     var opts = $.extend({}, $.googleMaps.defaults, options);
 
-    //$.fn.googleMaps.includeGoogle(opts.key, opts.sensor);
     return this.each(function() {
       // Create Map
       $.googleMaps.gMap = new GMap2(this, opts);
@@ -139,9 +137,9 @@
         startLongitude: -122.1419,
         endLatitude:	37.4519,
         endLongitude:	-122.1519,
-        color:			'#ff0000',
-        pixels:			2,
-        opacity:		10
+        color:          '#ff0000',
+        pixels:         2,
+        opacity:        10
       }
       // Merge the User & Default Options
       options = $.extend({}, geoDesicDefaults, options);
@@ -156,7 +154,13 @@
 
     localSearchControl: function(options) {
       var controlLocation = $.googleMaps.mapControlsLocation(options.location);
-      $.googleMaps.gMap.addControl(new $.googleMaps.gMap.LocalSearch(), new GControlPosition(controlLocation, new GSize(options.x,options.y)));
+      $.googleMaps.gMap.addControl(
+        new $.googleMaps.gMap.LocalSearch(),
+        new GControlPosition(
+          controlLocation,
+          new GSize(options.x,options.y)
+        )
+      );
     },
 
     getLatitude: function() {
@@ -200,8 +204,8 @@
         startLongitude: -122.1419,
         endLatitude:	37.4519,
         endLongitude:	-122.1519,
-        color:			'#ff0000',
-        pixels:			2
+        color:          '#ff0000',
+        pixels:         2
       }
       // Merge the User & Default Options
       options = $.extend({}, polylineDefaults, options);
@@ -222,18 +226,16 @@
     mapPanOptions: function(options) {
       // Returns Panning Options
       var panDefaults = {
-        panLatitude: 37.4569,
+        panLatitude:  37.4569,
         panLongitude: -122.1569,
-        timeout: 0
+        timeout:      0
       }
       return options = $.extend({}, panDefaults, options);
     },
 
     mapMarkersOptions: function(icon) {
-      //Define an icon
       var gIcon = new GIcon(G_DEFAULT_ICON);
       if ( icon.image ) {
-        // Define Icons Image
         gIcon.image = icon.image;
       }
       if ( icon.shadow ) {
