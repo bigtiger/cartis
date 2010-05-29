@@ -78,7 +78,7 @@
 
       // MARKERS
       if ( opts.markers ) {
-        $.googleMaps.mapMarkers(opts.markers);
+        $.googleMaps.addMapMarkers(opts.markers);
       }
 
       // CONTROLS
@@ -280,53 +280,58 @@
       return gIcon;
     },
 
-    mapMarkers: function(markers) {
-      if ( typeof(markers.length) == 'undefined' ) {
-        // One marker only. Parse it into an array for consistency.
-        markers = [markers];
+    addMapMarker: function(marker) {
+      var gIcon = null;
+      var gMarker = null;
+
+      if ( marker.icon ) {
+        gIcon = $.googleMaps.mapMarkersOptions(marker.icon);
       }
 
-      var gmarkers = [];
-      $.each(markers, function(marker) {
-        marker = markers[marker];
-        var gIcon = null;
-        if ( marker.icon ) {
-          gIcon = $.googleMaps.mapMarkersOptions(marker.icon);
-        }
+      if ( marker.latitude && marker.longitude ) {
+        center = $.googleMaps.mapLatLong(marker.latitude, marker.longitude);
+        gMarker = new GMarker(center, {draggable: marker.draggable, icon: gIcon});
+      }
 
-        var gmarker = null;
-        if (marker.geocode) {
-          var geocoder = new GClientGeocoder();
-          geocoder.getLatLng(marker.geocode, function(center) {
-            if (!center) {
-              alert(address + " not found");
-            } else {
-              gmarker = new GMarker(center, {draggable: marker.draggable, icon: gIcon});
-            }
-          });
-        } else {
-          if ( marker.latitude && marker.longitude ) {
-            // Latitude & Longitude Center Point
-            center = $.googleMaps.mapLatLong(marker.latitude, marker.longitude);
-            gmarker = new GMarker(center, {draggable: marker.draggable, icon: gIcon});
-          }
-        }
-        $.googleMaps.gMap.addOverlay(gmarker);
-        if ( marker.info ) {
-          // Hide Div Layer With Info Window HTML
-          $(marker.info.layer).hide();
-          // Marker Div Layer Exists
-          if ( marker.info.popup ) {
-            // Map Marker Shows an Info Box on Load
-            gmarker.openInfoWindowHtml($(marker.info.layer).html());
+      $.googleMaps.gMap.addOverlay(gMarker);
+
+      if (marker.geocode) {
+        var geocoder = new GClientGeocoder();
+        geocoder.getLatLng(marker.geocode, function(center) {
+          if (!center) {
+            alert(address + " not found");
           } else {
-            gmarker.bindInfoWindowHtml( $(marker.info.layer).html().toString() );
+            gMarker = new GMarker(center, {draggable: marker.draggable, icon: gIcon});
+          }
+        });
+      } else {
+        if ( marker.info ) {
+          $(marker.info.layer).hide();
+          if ( marker.info.popup ) {
+            gMarker.openInfoWindowHtml($(marker.info.layer).html());
+          } else {
+            gMarker.bindInfoWindowHtml(
+              $(marker.info.layer).html().toString()
+            );
           }
         }
+      }
+      return gMarker;
+    },
 
-        gmarkers.push(gmarker);
+    addMapMarkers: function(markers) {
+      var gMarkers = [];
+
+      $.each(markers, function(i) {
+        var marker = markers[i];
+        gMarkers.push($.googleMaps.addMapMarker(marker));
       });
-      return gmarkers;
+      return gMarkers;
+    },
+
+    mapMarkers: function(markers) {
+      console.log("DEPRECATION WARNING: mapMarkers will be removed in the 1.1 release");
+      return addMapMarkers(markers);
     },
 
     click: function(gObject, click_function) {
