@@ -1,5 +1,5 @@
 /*
- ### jQuery Google Maps Plugin v1.02 ###
+ ### Cartis: a jQuery Google Maps Plugin v1.02 ###
  * BasedOn: http://www.mayzes.org/googlemaps.jquery.html
  *
  * Dual licensed under the MIT and GPL licenses.
@@ -8,27 +8,27 @@
  ###
 */
 (function($) {
-  $.fn.googleMaps = function(options) {
+  $.fn.cartis = function(options) {
 
     if (!window.GBrowserIsCompatible || !GBrowserIsCompatible())  {
        return this;
     }
 
-    var opts = $.extend({}, $.googleMaps.defaults, options);
+    var opts = $.extend({}, $.cartis.defaults, options);
 
     return this.each(function() {
       // Create Map
-      $.googleMaps.gMap = new GMap2(this, opts);
-      $.googleMaps.mapsConfiguration(opts);
+      $.cartis.gMap = new GMap2(this, opts);
+      $.cartis.mapsConfiguration(opts);
     });
   };
 
-  $.googleMaps = {
+  $.cartis = {
 
     // Returns the visible rectangular region of the map view in
     // geographical coordinates.
     bounds: function() {
-      return $.googleMaps.gMap.getBounds();
+      return $.cartis.gMap.getBounds();
     },
 
     mapsConfiguration: function(opts) {
@@ -39,94 +39,94 @@
           if (!center) {
             alert(address + " not found");
           } else {
-            $.googleMaps.gMap.setCenter(center, opts.depth);
-            $.googleMaps.latitude = center.x;
-            $.googleMaps.longitude = center.y;
+            $.cartis.gMap.setCenter(center, opts.depth);
+            $.cartis.latitude = center.x;
+            $.cartis.longitude = center.y;
           }
         });
       } else {
         // Latitude & Longitude Center Point
-        var center	= $.googleMaps.mapLatLong(opts.latitude, opts.longitude);
+        var center	= $.cartis.mapLatLong(opts.latitude, opts.longitude);
         // Set the center of the Map with the new Center Point and Depth
-        $.googleMaps.gMap.setCenter(center, opts.depth);
+        $.cartis.gMap.setCenter(center, opts.depth);
       }
 
       // POLYLINE
       if ( opts.polyline ) {
         // Draw a PolyLine on the Map
-        $.googleMaps.gMap.addOverlay($.googleMaps.mapPolyLine(opts.polyline));
+        $.cartis.gMap.addOverlay($.cartis.mapPolyLine(opts.polyline));
       }
       // GEODESIC
       if ( opts.geodesic ) {
-        $.googleMaps.mapGeoDesic(opts.geodesic);
+        $.cartis.mapGeoDesic(opts.geodesic);
       }
       // PAN
       if ( opts.pan ) {
         // Set Default Options
-        opts.pan = $.googleMaps.mapPanOptions(opts.pan);
+        opts.pan = $.cartis.mapPanOptions(opts.pan);
         // Pan the Map
         window.setTimeout(function() {
-          $.googleMaps.gMap.panTo($.googleMaps.mapLatLong(opts.pan.panLatitude, opts.pan.panLongitude));
+          $.cartis.gMap.panTo($.cartis.mapLatLong(opts.pan.panLatitude, opts.pan.panLongitude));
         }, opts.pan.timeout);
       }
 
       // LAYER
       if ( opts.layer ) {
         // Set the Custom Layer
-        $.googleMaps.gMap.addOverlay(new GLayer(opts.layer));
+        $.cartis.gMap.addOverlay(new GLayer(opts.layer));
       }
 
       // MARKERS
       if ( opts.markers ) {
-        $.googleMaps.addMapMarkers(opts.markers);
+        $.cartis.addMapMarkers(opts.markers);
       }
 
       // CONTROLS
       if ( opts.controls.type || opts.controls.zoom ||  opts.controls.mapType ) {
-        $.googleMaps.mapControls(opts.controls);
+        $.cartis.mapControls(opts.controls);
       } else {
         if ( !opts.controls.hide ) {
-          $.googleMaps.gMap.setUIToDefault();
+          $.cartis.gMap.setUIToDefault();
         }
       }
 
       // SCROLL
       if ( opts.scroll ) {
-        $.googleMaps.gMap.enableScrollWheelZoom();
+        $.cartis.gMap.enableScrollWheelZoom();
       } else {
         if ( !opts.scroll ) {
-          $.googleMaps.gMap.disableScrollWheelZoom();
+          $.cartis.gMap.disableScrollWheelZoom();
         }
       }
 
       // LOCAL SEARCH
       if ( opts.controls.localSearch ) {
-        $.googleMaps.gMap.enableGoogleBar();
+        $.cartis.gMap.enableGoogleBar();
       } else {
-        $.googleMaps.gMap.disableGoogleBar();
+        $.cartis.gMap.disableGoogleBar();
       }
 
       // FEED (RSS/KML)
       if ( opts.feed ) {
-        $.googleMaps.gMap.addOverlay(new GGeoXml(opts.feed));
+        $.cartis.gMap.addOverlay(new GGeoXml(opts.feed));
       }
 
       // TRAFFIC INFO
       if ( opts.trafficInfo ) {
         var trafficOptions = {incidents:true};
         trafficInfo = new GTrafficOverlay(trafficOptions);
-        $.googleMaps.gMap.addOverlay(trafficInfo);
+        $.cartis.gMap.addOverlay(trafficInfo);
       }
 
       // DIRECTIONS
       if ( opts.directions ) {
-        $.googleMaps.directions = new GDirections($.googleMaps.gMap, opts.directions.panel);
-        $.googleMaps.directions.load(opts.directions.route);
+        $.cartis.directions = new GDirections($.cartis.gMap, opts.directions.panel);
+        $.cartis.directions.load(opts.directions.route);
       }
 
       if ( opts.streetViewOverlay ) {
         svOverlay = new GStreetviewOverlay();
-      $.googleMaps.gMap.addOverlay(svOverlay);
+      $.cartis.gMap.addOverlay(svOverlay);
       }
     },
 
@@ -149,13 +149,13 @@
         new GLatLng(options.endLatitude, options.endLongitude)],
         options.color, options.pixels, options.opacity, polyOptions
       );
-      $.googleMaps.gMap.addOverlay(polyline);
+      $.cartis.gMap.addOverlay(polyline);
     },
 
     localSearchControl: function(options) {
-      var controlLocation = $.googleMaps.mapControlsLocation(options.location);
-      $.googleMaps.gMap.addControl(
-        new $.googleMaps.gMap.LocalSearch(),
+      var controlLocation = $.cartis.mapControlsLocation(options.location);
+      $.cartis.gMap.addControl(
+        new $.cartis.gMap.LocalSearch(),
         new GControlPosition(
           controlLocation,
           new GSize(options.x,options.y)
@@ -164,11 +164,11 @@
     },
 
     getLatitude: function() {
-      return $.googleMaps.latitude;
+      return $.cartis.latitude;
     },
 
     getLongitude: function() {
-      return $.googleMaps.longitude;
+      return $.cartis.longitude;
     },
 
     directions: {},
@@ -211,8 +211,8 @@
       options = $.extend({}, polylineDefaults, options);
       //Return the New Polyline
       return new GPolyline([
-        $.googleMaps.mapLatLong(options.startLatitude, options.startLongitude),
-        $.googleMaps.mapLatLong(options.endLatitude, options.endLongitude)],
+        $.cartis.mapLatLong(options.startLatitude, options.startLongitude),
+        $.cartis.mapLatLong(options.endLatitude, options.endLongitude)],
         options.color,
         options.pixels
       );
@@ -285,15 +285,15 @@
       var gMarker = null;
 
       if ( marker.icon ) {
-        gIcon = $.googleMaps.mapMarkersOptions(marker.icon);
+        gIcon = $.cartis.mapMarkersOptions(marker.icon);
       }
 
       if ( marker.latitude && marker.longitude ) {
-        center = $.googleMaps.mapLatLong(marker.latitude, marker.longitude);
+        center = $.cartis.mapLatLong(marker.latitude, marker.longitude);
         gMarker = new GMarker(center, {draggable: marker.draggable, icon: gIcon});
       }
 
-      $.googleMaps.gMap.addOverlay(gMarker);
+      $.cartis.gMap.addOverlay(gMarker);
 
       if (marker.geocode) {
         var geocoder = new GClientGeocoder();
@@ -324,7 +324,7 @@
 
       $.each(markers, function(i) {
         var marker = markers[i];
-        gMarkers.push($.googleMaps.addMapMarker(marker));
+        gMarkers.push($.cartis.addMapMarker(marker));
       });
       return gMarkers;
     },
@@ -434,36 +434,36 @@
       options.zoom = $.extend({}, controlsDefaults.zoom, options.zoom);
 
       if ( options.type ) {
-        var controlLocation = $.googleMaps.mapControlsLocation(options.type.location);
+        var controlLocation = $.cartis.mapControlsLocation(options.type.location);
         var controlPosition = new GControlPosition(controlLocation, new GSize(options.type.x, options.type.y));
-        $.googleMaps.gMap.addControl($.googleMaps.mapControl(options.type.control), controlPosition);
+        $.cartis.gMap.addControl($.cartis.mapControl(options.type.control), controlPosition);
       }
       if ( options.mapType ) {
         if ( options.mapType.length >= 1 ) {
           for ( i = 0; i<options.mapType.length; i++) {
             if ( options.mapType[i].remove ) {
-              $.googleMaps.gMap.removeMapType($.googleMaps.mapTypeControl(options.mapType[i].remove));
+              $.cartis.gMap.removeMapType($.cartis.mapTypeControl(options.mapType[i].remove));
             }
             if ( options.mapType[i].add ) {
-              $.googleMaps.gMap.addMapType($.googleMaps.mapTypeControl(options.mapType[i].add));
+              $.cartis.gMap.addMapType($.cartis.mapTypeControl(options.mapType[i].add));
             }
           }
         }
         else {
           if ( options.mapType.add ) {
-            $.googleMaps.gMap.addMapType($.googleMaps.mapTypeControl(options.mapType.add));
+            $.cartis.gMap.addMapType($.cartis.mapTypeControl(options.mapType.add));
           }
           if ( options.mapType.remove ) {
-            $.googleMaps.gMap.removeMapType($.googleMaps.mapTypeControl(options.mapType.remove));
+            $.cartis.gMap.removeMapType($.cartis.mapTypeControl(options.mapType.remove));
           }
         }
       }
       if ( options.zoom ) {
-        var controlLocation = $.googleMaps.mapControlsLocation(options.zoom.location);
+        var controlLocation = $.cartis.mapControlsLocation(options.zoom.location);
         var controlPosition = new GControlPosition(controlLocation, new GSize(options.zoom.x, options.zoom.y))
-        var mapTypes = $.googleMaps.gMap.getMapTypes()
+        var mapTypes = $.cartis.gMap.getMapTypes()
 
-        $.googleMaps.gMap.addControl($.googleMaps.mapControl(options.zoom.control), controlPosition);
+        $.cartis.gMap.addControl($.cartis.mapControl(options.zoom.control), controlPosition);
 
         $.each(mapTypes, function(mapType) {
           var mapType = mapTypes[mapType];
@@ -488,7 +488,7 @@
         if (!point) {
           alert(address + " not found");
         } else {
-          $.googleMaps.gMap.setCenter(point, options.depth);
+          $.cartis.gMap.setCenter(point, options.depth);
         }
       });
     }
